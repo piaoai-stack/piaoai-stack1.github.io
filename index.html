@@ -1,8 +1,190 @@
-<p>Hello 大家好</p>
-<p>这是我的个人网站。 </p>
-<p>很高兴你来到这里, 你可以在以下的网站找到我</p>
-
-<ul>
-  <li> <a href="https://www.zhihu.com/people/AJLoveChina">知乎</a> </li>
-  <li> <a href="http://hejie.nigeerhuo.com">我的博客(已经不更细了,现在在知乎写文章)</a> </li>
-</ul>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日快乐！</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffebee;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 20px;
+        }
+        
+        h1 {
+            color: #e91e63;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            color: #555;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        
+        .balloons {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .balloon {
+            width: 60px;
+            height: 80px;
+            background-color: #e91e63;
+            border-radius: 50%;
+            margin: 0 10px;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .balloon:nth-child(2) {
+            background-color: #4caf50;
+            animation-delay: 0.5s;
+        }
+        
+        .balloon:nth-child(3) {
+            background-color: #2196f3;
+            animation-delay: 1s;
+        }
+        
+        .balloon:before {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 10px solid #e91e63;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .cake {
+            font-size: 5em;
+            margin: 20px 0;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        button {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background-color: #c2185b;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="balloons">
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+        </div>
+        
+        <h1>生日快乐！</h1>
+        
+        <div class="cake">🎂</div>
+        
+        <p>在这个特别的日子里，</p>
+        <p>愿你被幸福环绕，</p>
+        <p>愿你的梦想成真，</p>
+        <p>愿每一天都比昨天更美好！</p>
+        
+        <button onclick="playMusic()">点击播放音乐</button>
+    </div>
+    
+    <audio id="birthdaySong" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+    
+    <script>
+        function playMusic() {
+            const song = document.getElementById('birthdaySong');
+            song.play();
+            
+            // 添加一些彩带效果
+            createConfetti();
+        }
+        
+        function createConfetti() {
+            const colors = ['#e91e63', '#4caf50', '#2196f3', '#ffeb3b', '#9c27b0'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = '50%';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.zIndex = '1000';
+                
+                document.body.appendChild(confetti);
+                
+                const animationDuration = Math.random() * 3 + 2;
+                
+                confetti.animate([
+                    { top: '-10px', opacity: 1 },
+                    { top: '100vh', opacity: 0 }
+                ], {
+                    duration: animationDuration * 1000,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.9, 1)'
+                });
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, animationDuration * 1000);
+            }
+        }
+    </script>
+</body>
+</html>
